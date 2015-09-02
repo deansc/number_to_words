@@ -20,6 +20,22 @@ defmodule Nombre.Traducteur do
     |> Enum.reduce(0, &(&2 * 10 + &1))
   end
   
+  def translate([a], 0), do: translate_3_digits([a])
+  def translate([a], n) do 
+    [
+      translate_3_digits([a]),
+      translate_magnitude(n)
+    ] |> Enum.join(" ")
+  end
+
+  def translate([a, b], 0), do: translate_3_digits([a, b])
+  def translate([a, b], n) do 
+    [
+      translate_3_digits([a, b]),
+      translate_magnitude(n)
+    ] |> Enum.join(" ")
+  end
+
   def translate([a, b, c], 0), do: translate_3_digits([a, b, c])
   def translate([a, b, c], n) do 
     [
