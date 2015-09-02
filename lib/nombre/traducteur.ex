@@ -4,6 +4,7 @@ defmodule Nombre.Traducteur do
     n 
     |> decompose
     |> translate(0)
+    |> String.strip
   end
 
   def decompose(n) do 
