@@ -4,7 +4,6 @@ defmodule Nombre.Traducteur do
     n 
     |> decompose
     |> translate(0)
-    |> String.strip
   end
 
   def decompose(n) do 
@@ -21,30 +20,17 @@ defmodule Nombre.Traducteur do
     |> Enum.reduce(0, &(&2 * 10 + &1))
   end
   
-  def translate([a], 0), do: translate_3_digits([a])
-  def translate([a], n) do 
+  def translate(ary, 0) when is_list(ary) and length(ary) > 0 and length(ary) < 4 do 
+    translate_3_digits(ary)
+  end
+
+  def translate(ary, n) when is_list(ary) and length(ary) > 0 and length(ary) < 4 do 
     [
-      translate_3_digits([a]),
+      translate_3_digits(ary),
       translate_magnitude(n)
     ] |> Enum.join(" ")
   end
-
-  def translate([a, b], 0), do: translate_3_digits([a, b])
-  def translate([a, b], n) do 
-    [
-      translate_3_digits([a, b]),
-      translate_magnitude(n)
-    ] |> Enum.join(" ")
-  end
-
-  def translate([a, b, c], 0), do: translate_3_digits([a, b, c])
-  def translate([a, b, c], n) do 
-    [
-      translate_3_digits([a, b, c]),
-      translate_magnitude(n)
-    ] |> Enum.join(" ")
-  end
-
+  
   def translate([a, b, c | tail], n) do
     [
       translate(tail, n + 1), 
