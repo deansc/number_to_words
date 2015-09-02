@@ -15,27 +15,53 @@ defmodule Nombre.Traducteur do
   end
 
   def compose(arr) do 
-    a = arr
+    arr
     |> Enum.reverse
-    |> Enum.map_join "", &(Integer.to_string(&1))
-    String.to_integer a
+    |> Enum.reduce(0, &(&2 * 10 + &1))
   end
-
-  def translate([a], 0), do: Nombre.Dictionnaire.english(a)
-  def translate([a, 1], 0), do: Nombre.Dictionnaire.english(a + 10)
-  def translate([0, b], 0), do: Nombre.Dictionnaire.english(b * 10)
-  def translate([a, b], 0) do
-    [translate([0, b], 0), translate([a], 0)] |> Enum.join(" ")
-  end
-
-  def translate([a, b, c], 0) do 
+  
+  def translate([a, b, c], 0), do: translate_3_digits([a, b, c])
+  def translate([a, b, c], n) do 
     [
-      translate([c], 0),
-      Nombre.Dictionnaire.english(100),
-      translate([a, b], 0)
-    ]
+      translate_3_digits([a, b, c]),
+      translate_magnitude(n)
+    ] |> Enum.join(" ")
+  end
+
+  def translate([a, b, c | tail], n) do
+    [
+      translate(tail, n + 1), 
+      translate_3_digits([a, b, c]),
+      translate_magnitude(n)
+    ] |> Enum.join(" ")
+  end
+
+  def translate_3_digits([a]), do: Nombre.Dictionnaire.english(a)
+  def translate_3_digits([a, 0]), do: Nombre.Dictionnaire.english(a)
+  def translate_3_digits([a, 0, 0]), do: Nombre.Dictionnaire.english(a)
+
+  def translate_3_digits([a, 1]), do: Nombre.Dictionnaire.english(a + 10)
+  def translate_3_digits([0, b]), do: Nombre.Dictionnaire.english(b * 10)
+  def translate_3_digits([a, b]) do
+    [translate_3_digits([0, b]), translate_3_digits([a])] 
     |> Enum.join(" ")
   end
 
+  def translate_3_digits([0, 0, c]) do 
+    [translate_3_digits([c]), Nombre.Dictionnaire.english(100)]
+    |> Enum.join(" ")
+  end
 
+  def translate_3_digits([a, b, c]) do 
+    [translate_3_digits([0, 0, c]), translate_3_digits([a, b])]
+    |> Enum.join(" ")
+  end
+
+  def translate_magnitude(0), do: ""
+  def translate_magnitude(4), do: ""
+  def translate_magnitude(n) when n < 4 do
+    :math.pow(1000, n) 
+    |> round 
+    |> Nombre.Dictionnaire.english
+  end
 end

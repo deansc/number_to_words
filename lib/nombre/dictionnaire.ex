@@ -32,7 +32,8 @@ defmodule Nombre.Dictionnaire do
 
     100 => "hundred",
     1000 => "thousand",
-    1000000 => "million"
+    1000000 => "million",
+    1000000000 => "billion"
   }
 
 
