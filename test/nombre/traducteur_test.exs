@@ -1,7 +1,7 @@
 defmodule TraducteurTest do
   use ExUnit.Case
 
-  test ":compose should return an integer from an array of its inverted digits" do
+  test ":number_to_words should return the equivalent English word of a integer" do
     assert Nombre.Traducteur.number_to_words(1) === "one"
 
     assert Nombre.Traducteur.number_to_words(3543543) === "three million five hundred forty three thousand five hundred forty three"

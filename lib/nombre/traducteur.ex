@@ -20,15 +20,16 @@ defmodule Nombre.Traducteur do
     |> Enum.reduce(0, &(&2 * 10 + &1))
   end
   
-  def translate(ary, 0) when is_list(ary) and length(ary) > 0 and length(ary) < 4 do 
+  def translate(ary, 0) when is_list(ary) and length(ary) in (1..3) do 
     translate_3_digits(ary)
   end
 
-  def translate(ary, n) when is_list(ary) and length(ary) > 0 and length(ary) < 4 do 
+  def translate(ary, n) when is_list(ary) and length(ary) in (1..3) do 
     [
       translate_3_digits(ary),
       translate_magnitude(n)
-    ] |> Enum.join(" ")
+    ] 
+    |> Enum.join(" ")
   end
   
   def translate([a, b, c | tail], n) do
@@ -36,14 +37,15 @@ defmodule Nombre.Traducteur do
       translate(tail, n + 1), 
       translate_3_digits([a, b, c]),
       translate_magnitude(n)
-    ] |> Enum.join(" ")
+    ] 
+    |> Enum.join(" ")
   end
 
   def translate_3_digits([a]), do: Nombre.Dictionnaire.english(a)
-  def translate_3_digits([a, 0]), do: Nombre.Dictionnaire.english(a)
+  def translate_3_digits([a, b]) when b in (0..1), do: Nombre.Dictionnaire.english(a + b * 10)
+
   def translate_3_digits([a, 0, 0]), do: Nombre.Dictionnaire.english(a)
 
-  def translate_3_digits([a, 1]), do: Nombre.Dictionnaire.english(a + 10)
   def translate_3_digits([0, b]), do: Nombre.Dictionnaire.english(b * 10)
   def translate_3_digits([a, b]) do
     [translate_3_digits([0, b]), translate_3_digits([a])] 
