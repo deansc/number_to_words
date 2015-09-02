@@ -12,6 +12,7 @@ Nombre.Traducteur.number_to_words(22)
 
 Nombre.Traducteur.number_to_words(3543543)
 "three million five hundred forty three thousand five hundred forty three"
+```
 
 ## Installation
 
