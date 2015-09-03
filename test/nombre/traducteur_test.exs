@@ -2,31 +2,31 @@ defmodule TraducteurTest do
   use ExUnit.Case
 
   test ":number_to_words should return the equivalent English word of a integer" do
-    assert Nombre.Traducteur.number_to_words(1)  == "one"
-    assert Nombre.Traducteur.number_to_words(5)  == "five"
-    assert Nombre.Traducteur.number_to_words(10) == "ten"
-    assert Nombre.Traducteur.number_to_words(20) == "twenty"
-    assert Nombre.Traducteur.number_to_words(22) == "twenty two"
-    assert Nombre.Traducteur.number_to_words(34) == "thirty four"
-    assert Nombre.Traducteur.number_to_words(99) == "ninety nine"
+    assert Nombre.number_to_words(1)  == "one"
+    assert Nombre.number_to_words(5)  == "five"
+    assert Nombre.number_to_words(10) == "ten"
+    assert Nombre.number_to_words(20) == "twenty"
+    assert Nombre.number_to_words(22) == "twenty two"
+    assert Nombre.number_to_words(34) == "thirty four"
+    assert Nombre.number_to_words(99) == "ninety nine"
 
-    assert Nombre.Traducteur.number_to_words(100) == "one hundred"
-    assert Nombre.Traducteur.number_to_words(101) == "one hundred one"
-    assert Nombre.Traducteur.number_to_words(110) == "one hundred ten"
-    assert Nombre.Traducteur.number_to_words(120) == "one hundred twenty"
-    assert Nombre.Traducteur.number_to_words(130) == "one hundred thirty"
-    assert Nombre.Traducteur.number_to_words(135) == "one hundred thirty five"
-    assert Nombre.Traducteur.number_to_words(434) == "four hundred thirty four"
+    assert Nombre.number_to_words(100) == "one hundred"
+    assert Nombre.number_to_words(101) == "one hundred one"
+    assert Nombre.number_to_words(110) == "one hundred ten"
+    assert Nombre.number_to_words(120) == "one hundred twenty"
+    assert Nombre.number_to_words(130) == "one hundred thirty"
+    assert Nombre.number_to_words(135) == "one hundred thirty five"
+    assert Nombre.number_to_words(434) == "four hundred thirty four"
 
-    assert Nombre.Traducteur.number_to_words(900) == "nine hundred"
-    assert Nombre.Traducteur.number_to_words(999) == "nine hundred ninety nine"
+    assert Nombre.number_to_words(900) == "nine hundred"
+    assert Nombre.number_to_words(999) == "nine hundred ninety nine"
 
-    assert Nombre.Traducteur.number_to_words(1000000) == "one million"
-    assert Nombre.Traducteur.number_to_words(2000000) == "two million"
-    assert Nombre.Traducteur.number_to_words(3543543) == "three million five hundred forty three thousand five hundred forty three"
+    assert Nombre.number_to_words(1000000) == "one million"
+    assert Nombre.number_to_words(2000000) == "two million"
+    assert Nombre.number_to_words(3543543) == "three million five hundred forty three thousand five hundred forty three"
 
-    assert Nombre.Traducteur.number_to_words(765434) == "seven hundred sixty five thousand four hundred thirty four"
-    assert Nombre.Traducteur.number_to_words(1765434) == "one million seven hundred sixty five thousand four hundred thirty four"
+    assert Nombre.number_to_words(765434) == "seven hundred sixty five thousand four hundred thirty four"
+    assert Nombre.number_to_words(1765434) == "one million seven hundred sixty five thousand four hundred thirty four"
   end
 
   test ":compose should return an integer from an array of its inverted digits" do
