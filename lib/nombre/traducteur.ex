@@ -1,6 +1,6 @@
 defmodule Nombre.Traducteur do 
 
-  def number_to_words(0), do: Nombre.Dictionnaire.english(0)
+  def number_to_words(0), do: Nombre.Dictionnaire.to_word(0)
   def number_to_words(n) do
     n 
     |> decompose
@@ -48,36 +48,39 @@ defmodule Nombre.Traducteur do
   def translate_3_digits(list, magnitude) do 
     case magnitude do 
       0 -> translate_3_digits(list)
-      _ -> [translate_3_digits(list), translate_magnitude(magnitude)] |> Enum.join(" ")
+      _ -> 
+        [
+          translate_3_digits(list), 
+          translate_magnitude(magnitude)
+        ] |> Enum.join(" ")
     end
   end
 
   def translate_3_digits([a]) do 
     case a do 
       0 -> ""
-      _ -> Nombre.Dictionnaire.english(a)
+      _ -> Nombre.Dictionnaire.to_word(a)
     end
   end
 
   def translate_3_digits([a, b]) do 
     case [a, b] do
       [0, 0] -> "" 
-      [_, 0] -> Nombre.Dictionnaire.english(a + b * 10)
-      [_, 1] -> Nombre.Dictionnaire.english(a + b * 10)
-      [_, _] -> [Nombre.Dictionnaire.english(b * 10), translate_3_digits([a])] |> Enum.join(" ")
+      [_, 0] -> Nombre.Dictionnaire.to_word(a + b * 10)
+      [_, 1] -> Nombre.Dictionnaire.to_word(a + b * 10)
+      [_, _] -> [Nombre.Dictionnaire.to_word(b * 10), translate_3_digits([a])] |> Enum.join(" ")
     end
   end
 
   def translate_3_digits([a, b, c]) do 
-    case c do 
-      0 -> translate_3_digits([a, b])
-      _ -> 
+    case [a, b, c]  do 
+      [_, _, 0] -> translate_3_digits([a, b])
+      [_, _, _] -> 
         [
           translate_3_digits([c]), 
-          Nombre.Dictionnaire.english(100), 
+          Nombre.Dictionnaire.to_word(100), 
           translate_3_digits([a, b])
-        ] 
-        |> Enum.join(" ")
+        ] |> Enum.join(" ")
     end
   end
 
@@ -88,7 +91,7 @@ defmodule Nombre.Traducteur do
       _ ->
         :math.pow(1000, n) 
         |> round 
-        |> Nombre.Dictionnaire.english
+        |> Nombre.Dictionnaire.to_word
     end    
   end
 end
