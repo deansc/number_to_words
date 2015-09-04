@@ -75,10 +75,17 @@ defmodule Nombre.Traducteur do
   def translate_3_digits([a, b, c]) do 
     case [a, b, c]  do 
       [_, _, 0] -> translate_3_digits([a, b])
+      [0, 0, _] -> 
+        [
+          translate_3_digits([c]), 
+          Nombre.Dictionnaire.to_word(100), 
+          translate_3_digits([a, b])
+        ] |> Enum.join(" ")
       [_, _, _] -> 
         [
           translate_3_digits([c]), 
           Nombre.Dictionnaire.to_word(100), 
+          Nombre.Dictionnaire.separator,
           translate_3_digits([a, b])
         ] |> Enum.join(" ")
     end
