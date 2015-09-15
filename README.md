@@ -13,7 +13,7 @@ Nombre.number_to_words(22)
 "twenty two"
 
 Nombre.number_to_words(3543543)
-"three million five hundred forty three thousand five hundred forty three"
+"three million five hundred and forty three thousand five hundred and forty three"
 ```
 
 ## Installation

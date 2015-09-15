@@ -1,7 +1,7 @@
 defmodule DictionnaireTest do
   use ExUnit.Case
 
-  test ":to_word should returns English words for integers whom words are not constructed from oather integers words" do
+  test ":to_word should returns English words for integers whom words are not constructed from other integers words" do
     assert Nombre.Dictionnaire.to_word(0) ===  "zero"
     assert Nombre.Dictionnaire.to_word(1) ===  "one"
     assert Nombre.Dictionnaire.to_word(2) ===  "two"
@@ -18,7 +18,4 @@ defmodule DictionnaireTest do
 
   test ":to_word should raise en Error for integers whom words are constructed from other integers words" do
   end
-
-   
-
 end
