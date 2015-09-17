@@ -14,21 +14,14 @@ defmodule Nombre.Traducteur do
 
   def decompose(n) do 
     n 
-    |> do_decompose([])
+    |> Integer.digits
     |> Enum.reverse
-  end
-
-  # can be replaced by Integer.digits(n) when Elixir v.1.1 is released
-  defp do_decompose(0, []), do: [0]
-  defp do_decompose(0, acc), do: acc
-  defp do_decompose(n, acc) do
-    do_decompose(div(n, 10), [rem(n, 10) | acc])
   end
 
   def compose(arr) do 
     arr
     |> Enum.reverse
-    |> Enum.reduce(0, &(&2 * 10 + &1))
+    |> Integer.undigits
   end
 
   def translate([], _), do: [""]
